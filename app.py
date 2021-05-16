@@ -3,7 +3,7 @@ from flask import render_template, redirect, request, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///varisleo"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://gqubsaskpswkpp:93ca8c5f7afdb86e50081d98a071539ce3d67a22ba184b7040b0af32d78c9489@ec2-3-217-219-146.compute-1.amazonaws.com:5432/d2e6ie4vsk97k5"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = "avain"
 db = SQLAlchemy(app)
