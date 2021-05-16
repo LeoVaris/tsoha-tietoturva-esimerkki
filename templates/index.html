@@ -1,23 +1,26 @@
 <html>
   <h1>Tervetuloa</h1>
   {% if user %}
-  <h2>Käyttäjänimi: {{ user[0] }}</h2>
+  <h4>Käyttäjänimi: {{ user[0] }}</h4>
   <a href="/logout">Kirjaudu ulos</a>
-  <a href="/user/{{ user[1] }}">Oma sivu</a>
+  <a href="/user/{{ user[1] }}">Omat muistiinpanot</a>
   {% else %}
-  <h2>Et ole kirjautunut</h2>
+  <h4>Et ole kirjautunut</h4>
   <a href="/login">Kirjaudu sisään</a>
   <a href="/register">Rekisteröidy</a>
   {% endif %}
-  <h3>Hae viestejä hakusanalla:</h3>
-  <p>Haku näyttää vain julkiset viestit</p>
+  <h3>Hae muistiinpanoja hakusanalla:</h3>
+  <p>Haku näyttää vain julkiset muistiinpanot</p>
   <form action="/search" method="POST">
     Hakusana: <input type="text" name="keyword" />
     <input type="submit" value="Hae" />
   </form>
-  <form action="/send_message" method="POST">
-    Viesti: <input type="text" name="message" />
+  {% if user %}
+  <h3>Lisää muistiinpano</h3>
+  <form action="/add_note" method="POST">
+    Sisältö: <input type="text" name="content" />
     Yksityinen: <input type="checkbox" name="private">
-    <input type="submit" value="Lähetä" />
+    <input type="submit" value="Lisää" />
   </form>
+  {% endif %}
 </html>
