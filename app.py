@@ -52,7 +52,7 @@ def register():
 @app.route("/search", methods=["POST"])
 def search():
     keyword = request.form["keyword"]
-    sql = f"SELECT content FROM messages WHERE content LIKE '%{keyword}%' AND private = FALSE"
+    sql = f"SELECT M.content, U.username FROM messages M, users U WHERE M.user_id = U.id AND M.content LIKE '%{keyword}%' AND M.private = FALSE"
     results = db.session.execute(sql).fetchall()
     return render_template("search.html", results=results)
 
@@ -79,6 +79,6 @@ def delete_message():
 
 @app.route("/user/<int:user_id>")
 def user_home(user_id):
-    sql = f"SELECT content, id FROM messages WHERE user_id = {user_id}"
+    sql = f"SELECT content, id, private FROM messages WHERE user_id = {user_id}"
     results = db.session.execute(sql).fetchall()
     return render_template("user_page.html", results=results)

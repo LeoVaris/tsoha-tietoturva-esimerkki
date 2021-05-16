@@ -2,14 +2,15 @@
   <h1>Kotisivu</h1>
   <h2>Käyttäjänimi: {{ username }}</h2>
   <h3>Omat viestit</h3>
-  <form action="/search" method="POST">
-    Hakusana: <input type="text" name="keyword" />
-    <input type="submit" value="Hae" />
-  </form>
   <ul>
     {% for row in results %}
       <li><form action="/delete_message" method="POST">
         {{ row[0] }}
+        {% if row[2] %}
+        <b>Yksityinen</b>
+        {% else %}
+        <b>Julkinen</b>
+        {% endif %}
         <input type="hidden" value="{{ row[1] }}" name="msg_id" />
         <input type="submit" value="Poista" />
       </form></li>
